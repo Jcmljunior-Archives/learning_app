@@ -15,7 +15,6 @@ class InitialViewState extends State<InitialView> {
   @override
   void initState() {
     super.initState();
-
     _controller.counter.initCounter();
   }
 
