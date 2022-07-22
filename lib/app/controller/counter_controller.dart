@@ -1,42 +1,45 @@
 import 'package:sqflite_common/sqlite_api.dart';
-
-import '../database/db_controller.dart';
+import '../controller/database_controller.dart';
 
 class CounterController {
-  // instancia do banco.
   Database? db;
 
-  // define o valor inicial do contador.
   int _length = 0;
 
   get length => _length;
 
   // Construtor.
   CounterController() {
-    initCounter();
+    constructor();
   }
 
-  initCounter() async {
-    _getLength();
+  Future<void> constructor() async {
+    await _getLength();
   }
 
-  _setLength(int count) async {
-    db = await DBController.db.database;
-    db!.update(
-      'counter',
-      {
-        'counter': count,
-      },
-    );
-  }
-
-  _getLength() async {
-    db = await DBController.db.database;
+  Future<void> _getLength() async {
+    db = await DatabaseController.getInstance.database;
     List counter = await db!.query('counter', limit: 1);
     _length = counter[0]['counter'] as int;
   }
 
-  setIncrement() => _setLength(_length++);
+  Future<void> setIncrement() async {
+    db = await DatabaseController.getInstance.database;
+    db!.update(
+      'counter',
+      {
+        'counter': _length++ + 1,
+      },
+    );
+  }
 
-  setDecrement() => _setLength(_length--);
+  Future<void> setDecrement() async {
+    db = await DatabaseController.getInstance.database;
+    db!.update(
+      'counter',
+      {
+        'counter': _length-- - 1,
+      },
+    );
+  }
 }
