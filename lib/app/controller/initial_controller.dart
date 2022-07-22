@@ -1,9 +1,9 @@
 import '../controller/counter_controller.dart';
 
 class InitialController {
-  // Provedores:
+  // Provedores de ações:
   CounterController counter = CounterController();
 
-  // Configurações.
+  // Define o estado da página inicial. (Carregando, carregado)
   bool isLoaded = false;
 }

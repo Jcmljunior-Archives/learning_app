@@ -7,6 +7,11 @@ class CounterModel {
     required this.counter,
   });
 
+  factory CounterModel.fromMap(Map<String, dynamic> json) => CounterModel(
+        id: json['id'],
+        counter: json['counter'],
+      );
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
