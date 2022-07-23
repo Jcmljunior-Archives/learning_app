@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:sqflite_common/sqlite_api.dart' show Database;
 
 import '../controller/database_controller.dart';

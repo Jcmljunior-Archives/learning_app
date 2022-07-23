@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart'
         getExternalStorageDirectory,
         getLibraryDirectory,
         getTemporaryDirectory;
+// ignore: depend_on_referenced_packages
 import 'package:sqflite_common/sqlite_api.dart'
     show Database, OpenDatabaseOptions;
 import 'package:sqflite_common_ffi/sqflite_ffi.dart' show databaseFactoryFfi;
