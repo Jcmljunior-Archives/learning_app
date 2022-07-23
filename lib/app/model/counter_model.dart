@@ -1,3 +1,15 @@
+import 'dart:convert';
+
+CounterModel counterModelFromJson(String str) {
+  final data = jsonDecode(str);
+  return CounterModel.fromMap(data);
+}
+
+String counterModelToJson(CounterModel counter) {
+  final data = counter.toMap();
+  return jsonEncode(data);
+}
+
 class CounterModel {
   int id;
   int counter;
