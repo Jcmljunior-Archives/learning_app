@@ -14,7 +14,6 @@ class InitialView extends StatefulWidget {
 
 class InitialViewState extends State<InitialView> {
   final InitialController _controller = InitialController();
-  String locale = 'pt-br';
 
   @override
   void initState() {
