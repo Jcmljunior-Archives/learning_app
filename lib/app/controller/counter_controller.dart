@@ -1,49 +1,41 @@
 // ignore: depend_on_referenced_packages
-import 'package:sqflite_common/sqlite_api.dart' show Database;
+import 'package:sqflite_common/sqlite_api.dart';
 
-import '../controller/database_controller.dart';
 import '../model/counter_model.dart';
+import 'database_controller.dart';
 
 class CounterController {
   Database? db;
 
-  int _length = 0;
+  int counter;
 
-  get length => _length;
+  CounterController({
+    required this.counter,
+  });
 
-  // Construtor.
-  CounterController() {
-    constructor();
-  }
-
-  Future<void> constructor() async {
-    await _getAllCounter();
-  }
-
-  // Lista as informações do contador. (Quantidade de cliques)
-  Future<void> _getAllCounter() async {
+  Future<void> updateCounter() async {
     db = await DatabaseController.getInstance.database;
-    List counter = await db!.query('counter', limit: 1);
-    _length = CounterModel.fromMap(counter.first).counter;
+    List count = await db!.query('counter', limit: 1);
+    counter = CounterModel.fromMap(count.first).counter;
   }
 
-  Future<void> setIncrement() async {
-    db = await DatabaseController.getInstance.database;
-    db!.update(
-      'counter',
-      {
-        'counter': _length++ + 1,
-      },
-    );
-  }
+  Future<void> increment() async => {
+        db = await DatabaseController.getInstance.database,
+        db!.update(
+          'counter',
+          {
+            'counter': counter++ + 1,
+          },
+        ),
+      };
 
-  Future<void> setDecrement() async {
-    db = await DatabaseController.getInstance.database;
-    db!.update(
-      'counter',
-      {
-        'counter': _length-- - 1,
-      },
-    );
-  }
+  Future<void> decrement() async => {
+        db = await DatabaseController.getInstance.database,
+        db!.update(
+          'counter',
+          {
+            'counter': counter-- - 1,
+          },
+        ),
+      };
 }

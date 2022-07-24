@@ -11,10 +11,10 @@ import 'package:path_provider/path_provider.dart'
         getExternalStorageDirectory,
         getLibraryDirectory,
         getTemporaryDirectory;
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite_common/sqlite_api.dart'
     show Database, OpenDatabaseOptions;
-import 'package:sqflite_common_ffi/sqflite_ffi.dart' show databaseFactoryFfi;
 
 enum DirectoriesType {
   applicationSupport,
@@ -85,6 +85,8 @@ class DatabaseController {
 
   // Cria uma instancia de dados.
   Future<Database> _init() async {
+    sqfliteFfiInit();
+
     return await databaseFactoryFfi.openDatabase(
         join(
           await getDirectory(DirectoriesType.applicationDocuments),
